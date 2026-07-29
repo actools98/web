@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  // Datos por defecto (fallback)
+  // ========== DATOS POR DEFECTO (FALLBACK) ==========
   const defaultTextos = {
     hero: {
       tag: "Transformación digital",
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let textos = defaultTextos;
   let enlaces = defaultEnlaces;
 
-  // Intentar cargar JSON, si falla usar defaults
+  // Cargar JSON
   try {
     const [resTextos, resEnlaces] = await Promise.all([
       fetch('textos.json').catch(() => null),
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.warn('Error al cargar JSON, usando valores por defecto.', e);
   }
 
-  // Función para mezclar objetos profundamente
+  // Función merge
   function mergeDeep(target, source) {
     const result = { ...target };
     for (const key in source) {
@@ -111,18 +111,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     return result;
   }
 
-  // Función para poblar textos (solo si el valor es string)
+  // Poblar textos
   function populateTexts(data) {
     document.querySelectorAll('[data-key]').forEach(el => {
       const key = el.dataset.key;
       const value = key.split('.').reduce((obj, k) => obj?.[k], data);
-      // Solo asignar si es string o número, ignorar objetos
       if (value !== undefined && value !== null && (typeof value === 'string' || typeof value === 'number')) {
         el.innerHTML = value;
       }
     });
-
-    // También manejar elementos con data-text (sin data-key)
     document.querySelectorAll('[data-text]').forEach(el => {
       if (!el.hasAttribute('data-key')) {
         const key = el.dataset.text;
@@ -133,8 +130,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   }
-
-  // Poblar textos
   populateTexts(textos);
 
   // Poblar enlaces (href)
@@ -148,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Función para poblar listas de navegación
+  // Navegación
   function populateNav(selector, items) {
     const container = document.querySelector(selector);
     if (!container) return;
@@ -162,11 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       container.appendChild(li);
     });
   }
-
-  // Menú principal
   populateNav('.nav-links', enlaces.menu);
-
-  // Footer navegación
   populateNav('#footerNav', enlaces.footer_nav);
 
   // Redes sociales
@@ -182,7 +173,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Servicios (grid)
+  // Servicios
   const serviciosGrid = document.getElementById('serviciosGrid');
   if (serviciosGrid && textos.servicios_list) {
     serviciosGrid.innerHTML = '';
@@ -198,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Audiencia (tags)
+  // Audiencia
   const audienceList = document.getElementById('audienceList');
   if (audienceList && textos.audiencia_list) {
     audienceList.innerHTML = '';
@@ -210,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Imagen "about" (llave de tuercas) con texto debajo
+  // About image
   const aboutImage = document.getElementById('aboutImage');
   if (aboutImage) {
     aboutImage.innerHTML = `
@@ -237,12 +228,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // Formulario: mostrar alerta después de envío exitoso (opcional)
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    // No prevenimos el envío porque FormSubmit lo maneja
-    // Solo mostramos un mensaje después de un breve retraso (por si la página se recarga)
-    setTimeout(() => {
-      alert('¡Gracias por contactarnos! En breve nos comunicaremos contigo. 😊');
-    }, 500);
-  });
+  // ========== FORMULARIO: ENVÍO CON FETCH (AJAX) ==========
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault(); // Evita la recarga de la página
+
+      // Recoger los datos del formulario
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Mostrar un indicador de carga (opcional)
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/el/mobalo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          // Éxito
+          alert('¡Gracias por contactarnos! En breve nos comunicaremos contigo. 😊');
+          form.reset(); // Limpiar el formulario
+        } else {
+          // Error del servidor
+          const errorData = await response.json();
+          alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde. (Error: ' + (errorData.message || response.status) + ')');
+        }
+      } catch (error) {
+        // Error de red
+        alert('No se pudo conectar con el servidor. Verifica tu conexión a internet e inténtalo de nuevo.');
+        console.error('Error de envío:', error);
+      } finally {
+        // Restaurar el botón
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
 });
