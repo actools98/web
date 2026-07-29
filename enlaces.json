@@ -1,0 +1,23 @@
+{
+  "menu": [
+    { "text": "Servicios", "href": "#servicios" },
+    { "text": "Para quién", "href": "#para-quien" },
+    { "text": "Contacto", "href": "#contacto" },
+    { "text": "Formulario", "href": "#" }
+  ],
+  "hero": {
+    "cta_primary": { "href": "#contacto" },
+    "cta_secondary": { "href": "#servicios" }
+  },
+  "footer_nav": [
+    { "text": "Servicios", "href": "#servicios" },
+    { "text": "Para quién", "href": "#para-quien" },
+    { "text": "Contacto", "href": "#contacto" }
+  ],
+  "social": [
+    { "href": "#", "icon": "fab fa-facebook-f", "label": "Facebook" },
+    { "href": "#", "icon": "fab fa-instagram", "label": "Instagram" },
+    { "href": "#", "icon": "fab fa-linkedin-in", "label": "LinkedIn" },
+    { "href": "#", "icon": "fab fa-x-twitter", "label": "Twitter" }
+  ]
+}
