@@ -43,9 +43,9 @@ img {
   display: block;
 }
 .container {
-  max-width: 1200px;          /* Valor original */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;            /* Valor original */
+  padding: 0 24px;
 }
 
 /* ========== TIPOGRAFÍA ========== */
@@ -186,7 +186,7 @@ header {
 }
 .hero h1 {
   font-size: 3.4rem;
-  max-width: 900px;           /* Aumentado de 800px */
+  max-width: 900px;
   margin: 0 auto 1.2rem;
 }
 .hero h1 .highlight {
@@ -194,7 +194,7 @@ header {
 }
 .hero p {
   font-size: 1.25rem;
-  max-width: 700px;           /* Aumentado de 600px */
+  max-width: 700px;
   margin: 0 auto 2rem;
 }
 .hero-buttons {
@@ -206,7 +206,7 @@ header {
 
 /* ========== PROPUESTA DE VALOR ========== */
 .propuesta-text {
-  max-width: 800px;           /* Aumentado de 700px */
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -443,9 +443,8 @@ footer {
   .nav-cta {
     display: inline-block;
   }
-  /* Hero */
   .hero {
-    padding: 80px 0 60px;      /* Más espacio arriba */
+    padding: 80px 0 60px;
   }
   .hero h1 {
     font-size: 2.2rem;
@@ -456,24 +455,21 @@ footer {
     max-width: 100%;
   }
   .hero .tag {
-    margin-bottom: 0.5rem;     /* Menos separación */
+    margin-bottom: 0.5rem;
   }
   .hero-buttons {
-    gap: 20px;                /* Más separación entre botones */
+    gap: 20px;
   }
-  /* Secciones */
   .section {
-    padding: 60px 0;          /* Reducido para no saturar */
+    padding: 60px 0;
   }
   h2 {
     font-size: 1.8rem;
     margin-bottom: 1.2rem;
   }
-  /* Propuesta */
   .propuesta-text {
     max-width: 100%;
   }
-  /* Audiencia: grid de 2 columnas en móvil */
   .audience-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -486,11 +482,9 @@ footer {
     text-align: center;
     white-space: nowrap;
   }
-  /* Tarjetas */
   .card {
     padding: 20px 16px;
   }
-  /* Contacto */
   .contact-wrap {
     gap: 30px;
   }
@@ -503,7 +497,6 @@ footer {
     padding: 12px 24px;
     font-size: 0.95rem;
   }
-  /* Footer */
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -518,12 +511,12 @@ footer {
     font-size: 1.8rem;
   }
   .audience-list {
-    grid-template-columns: 1fr 1fr; /* Mantener 2 columnas */
+    grid-template-columns: 1fr 1fr;
   }
   .audience-tag {
     font-size: 0.8rem;
     padding: 6px 10px;
-    white-space: normal;      /* Permitir salto de línea si es necesario */
+    white-space: normal;
   }
 }
 
