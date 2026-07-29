@@ -43,14 +43,9 @@ img {
   display: block;
 }
 .container {
-  max-width: 1400px;           /* Antes 1200px */
+  max-width: 1200px;          /* Valor original */
   margin: 0 auto;
-  padding: 0 24px;
-}
-@media (min-width: 1200px) {
-  .container {
-    padding: 0 40px;          /* Mayor margen en pantallas grandes */
-  }
+  padding: 0 24px;            /* Valor original */
 }
 
 /* ========== TIPOGRAFÍA ========== */
@@ -191,7 +186,7 @@ header {
 }
 .hero h1 {
   font-size: 3.4rem;
-  max-width: 800px;
+  max-width: 900px;           /* Aumentado de 800px */
   margin: 0 auto 1.2rem;
 }
 .hero h1 .highlight {
@@ -199,7 +194,7 @@ header {
 }
 .hero p {
   font-size: 1.25rem;
-  max-width: 600px;
+  max-width: 700px;           /* Aumentado de 600px */
   margin: 0 auto 2rem;
 }
 .hero-buttons {
@@ -207,6 +202,12 @@ header {
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* ========== PROPUESTA DE VALOR ========== */
+.propuesta-text {
+  max-width: 800px;           /* Aumentado de 700px */
+  margin: 0 auto;
 }
 
 /* ========== CARDS / GRID ========== */
@@ -442,35 +443,41 @@ footer {
   .nav-cta {
     display: inline-block;
   }
+  /* Hero */
   .hero {
-    padding: 60px 0 40px;
+    padding: 80px 0 60px;      /* Más espacio arriba */
   }
   .hero h1 {
     font-size: 2.2rem;
+    max-width: 100%;
   }
   .hero p {
     font-size: 1rem;
+    max-width: 100%;
   }
+  .hero .tag {
+    margin-bottom: 0.5rem;     /* Menos separación */
+  }
+  .hero-buttons {
+    gap: 20px;                /* Más separación entre botones */
+  }
+  /* Secciones */
   .section {
-    padding: 80px 0;          /* Más espacio vertical en móvil */
+    padding: 60px 0;          /* Reducido para no saturar */
   }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
   }
-  .contact-wrap {
-    gap: 30px;
+  /* Propuesta */
+  .propuesta-text {
+    max-width: 100%;
   }
-  .btn {
-    padding: 12px 24px;
-    font-size: 0.95rem;
-  }
-
-  /* AUDIENCIA en GRID (móvil) */
+  /* Audiencia: grid de 2 columnas en móvil */
   .audience-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
     justify-content: center;
   }
   .audience-tag {
@@ -479,24 +486,44 @@ footer {
     text-align: center;
     white-space: nowrap;
   }
+  /* Tarjetas */
+  .card {
+    padding: 20px 16px;
+  }
+  /* Contacto */
+  .contact-wrap {
+    gap: 30px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
 @media (max-width: 480px) {
   .container {
     padding: 0 16px;
   }
-  .card {
-    padding: 24px 18px;
-  }
   .hero h1 {
     font-size: 1.8rem;
   }
   .audience-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr; /* Mantener 2 columnas */
   }
   .audience-tag {
     font-size: 0.8rem;
     padding: 6px 10px;
+    white-space: normal;      /* Permitir salto de línea si es necesario */
   }
 }
 
