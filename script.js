@@ -210,13 +210,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Imagen "about" (llave de tuercas)
+  // Imagen "about" (llave de tuercas) con texto debajo
   const aboutImage = document.getElementById('aboutImage');
   if (aboutImage) {
     aboutImage.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0B4F5C" width="64" height="64">
-        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-      </svg>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0B4F5C" width="64" height="64">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+        <p style="color:var(--text-secondary);font-size:0.95rem;margin:0;">
+          Hecho con ❤️ para emprendedores.
+        </p>
+      </div>
     `;
   }
 
@@ -232,8 +237,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // Formulario: enviar por mailto y mostrar alerta
+  // Formulario: mostrar alerta después de envío exitoso (opcional)
   document.getElementById('contactForm').addEventListener('submit', function(e) {
+    // No prevenimos el envío porque FormSubmit lo maneja
+    // Solo mostramos un mensaje después de un breve retraso (por si la página se recarga)
     setTimeout(() => {
       alert('¡Gracias por contactarnos! En breve nos comunicaremos contigo. 😊');
     }, 500);
