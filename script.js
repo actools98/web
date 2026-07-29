@@ -228,47 +228,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // ========== FORMULARIO: ENVÍO CON FETCH (AJAX) ==========
+  // ========== FORMULARIO: ENVÍO CON FETCH (CORREGIDO) ==========
   const form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', async function (e) {
-      e.preventDefault(); // Evita la recarga de la página
+      e.preventDefault(); // Evita la recarga
 
-      // Recoger los datos del formulario
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      // Mostrar un indicador de carga (opcional)
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
       submitBtn.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
       submitBtn.disabled = true;
 
+      // Recoger datos como FormData (no convertimos a JSON)
+      const formData = new FormData(form);
+
       try {
-        const response = await fetch('https://formsubmit.co/ajax/el/mobalo', {
+        const response = await fetch('https://formsubmit.co/el/mobalo', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json'   // Pedimos respuesta JSON
           },
-          body: JSON.stringify(data)
+          body: formData                   // Enviamos como multipart/form-data
         });
 
         if (response.ok) {
-          // Éxito
+          const result = await response.json();
+          console.log('Respuesta de FormSubmit:', result);
           alert('¡Gracias por contactarnos! En breve nos comunicaremos contigo. 😊');
-          form.reset(); // Limpiar el formulario
+          form.reset(); // Limpiar campos
         } else {
-          // Error del servidor
-          const errorData = await response.json();
-          alert('Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde. (Error: ' + (errorData.message || response.status) + ')');
+          const errorText = await response.text();
+          alert('Hubo un problema al enviar el mensaje. Código: ' + response.status + ' - ' + errorText);
+          console.error('Error HTTP:', response.status, errorText);
         }
       } catch (error) {
-        // Error de red
-        alert('No se pudo conectar con el servidor. Verifica tu conexión a internet e inténtalo de nuevo.');
-        console.error('Error de envío:', error);
+        // Error de red o CORS
+        alert('Error de conexión: ' + error.message + '. Revisa la consola para más detalles.');
+        console.error('Error de fetch:', error);
       } finally {
-        // Restaurar el botón
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
       }
