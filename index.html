@@ -113,14 +113,14 @@
         <p style="max-width:500px;margin:0 auto 2.5rem;" data-key="contacto.desc"></p>
       </div>
       <div class="contact-wrap">
-        <!-- FORMULARIO CON FORMSUBMIT (endpoint personalizado) -->
+        <!-- FORMULARIO CON FORMSUBMIT (endpoint genérico) -->
         <form class="contact-form" id="contactForm"
-              action="https://formsubmit.co/el/mobalo"
+              action="https://formsubmit.co/info@actols.com"
               method="POST"
               enctype="multipart/form-data">
           <!-- Asunto del correo -->
           <input type="hidden" name="_subject" value="Nuevo mensaje desde actols.com" />
-          <!-- Redirigir a la misma página con un parámetro de éxito -->
+          <!-- Redirigir (solo si el JS falla) -->
           <input type="hidden" name="_next" value="https://actols.com/#contacto?enviado=true" />
 
           <input type="text" name="nombre" placeholder="Tu nombre completo" required />
