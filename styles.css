@@ -443,6 +443,10 @@ footer {
   .nav-cta {
     display: inline-block;
   }
+  /* ===== AUMENTAR PADDING DE SECCIONES PARA DAR MÁS AIRE ===== */
+  .section {
+    padding: 80px 0;  /* Antes era 60px, ahora igual que escritorio */
+  }
   .hero {
     padding: 80px 0 60px;
   }
@@ -459,9 +463,6 @@ footer {
   }
   .hero-buttons {
     gap: 20px;
-  }
-  .section {
-    padding: 60px 0;
   }
   h2 {
     font-size: 1.8rem;
