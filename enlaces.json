@@ -3,7 +3,7 @@
     { "text": "Servicios", "href": "#servicios" },
     { "text": "Para quién", "href": "#para-quien" },
     { "text": "Contacto", "href": "#contacto" },
-    { "text": "Formulario", "href": "formulario.actols.com" }
+    { "text": "Formulario", "href": "https://formulario.actols.com" }
   ],
   "hero": {
     "cta_primary": { "href": "#contacto" },
