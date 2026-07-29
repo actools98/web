@@ -43,9 +43,14 @@ img {
   display: block;
 }
 .container {
-  max-width: 1200px;
+  max-width: 1400px;           /* Antes 1200px */
   margin: 0 auto;
   padding: 0 24px;
+}
+@media (min-width: 1200px) {
+  .container {
+    padding: 0 40px;          /* Mayor margen en pantallas grandes */
+  }
 }
 
 /* ========== TIPOGRAFÍA ========== */
@@ -447,7 +452,7 @@ footer {
     font-size: 1rem;
   }
   .section {
-    padding: 60px 0;
+    padding: 80px 0;          /* Más espacio vertical en móvil */
   }
   .footer-grid {
     grid-template-columns: 1fr;
@@ -460,6 +465,20 @@ footer {
     padding: 12px 24px;
     font-size: 0.95rem;
   }
+
+  /* AUDIENCIA en GRID (móvil) */
+  .audience-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: center;
+  }
+  .audience-tag {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    text-align: center;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 480px) {
@@ -471,6 +490,13 @@ footer {
   }
   .hero h1 {
     font-size: 1.8rem;
+  }
+  .audience-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .audience-tag {
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
 }
 
