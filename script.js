@@ -1,274 +1,528 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  // ========== DATOS POR DEFECTO (FALLBACK) ==========
-  const defaultTextos = {
-    hero: {
-      tag: "Transformación digital",
-      title: "Gestión inteligente para <span class=\"highlight\">tu negocio</span>",
-      subtitle: "¿Necesitas agendamiento, facturación, tareas u otras herramientas?<br />Hazte la vida más fácil con nosotros.",
-      cta_primary: { text: "Agenda una consultoría" },
-      cta_secondary: { text: "Conoce más" }
-    },
-    propuesta: {
-      tag: "Propuesta de valor",
-      title: "Menos tiempo en tareas, más tiempo en crecer",
-      text: "¿Cansado de perder horas que podrías usar en otras tareas importantes? actools automatiza la gestión de tu negocio para que puedas dedicarte a lo que realmente importa: atender a tus clientes y hacer crecer tu empresa."
-    },
-    servicios: {
-      tag: "Servicios",
-      title: "Automatiza todo lo que necesitas.",
-      desc: "Soluciones diseñadas para simplificar cada área de tu operación diaria."
-    },
-    servicios_list: [
-      { icon: "fas fa-calendar-check", title: "Agendamiento inteligente", desc: "Gestiona turnos, citas y disponibilidad en tiempo real. Recordatorios automáticos para tus clientes." },
-      { icon: "fas fa-comment-dots", title: "Gestor de respuestas automáticas para vendedores", desc: "Automatiza la comunicación con tus clientes potenciales, responde preguntas frecuentes y califica leads sin esfuerzo." },
-      { icon: "fas fa-tasks", title: "Gestión de tareas", desc: "Asigna, prioriza y da seguimiento a las actividades de tu equipo. Todo en un tablero visual." },
-      { icon: "fas fa-chart-line", title: "Reportes y análisis", desc: "Visualiza el rendimiento de tu negocio con métricas claras: ingresos, ocupación y productividad." },
-      { icon: "fas fa-users", title: "Gestión de clientes", desc: "Centraliza la información de tus clientes, historial de compras y preferencias para ofrecer un mejor servicio." },
-      { icon: "fas fa-boxes", title: "Sistema de inventarios", desc: "Controla tus existencias, recibe alertas de stock bajo y gestiona entradas y salidas de productos de forma sencilla." }
-    ],
-    audiencia: {
-      tag: "Audiencia",
-      title: "Diseñado para emprendedores como tú",
-      desc: "actools se adapta a cualquier negocio que quiera optimizar su gestión diaria."
-    },
-    audiencia_list: [
-      "✂️ Barberías", "🥖 Panaderías", "💻 Freelancers", "🏪 Comercios",
-      "☕ Cafeterías", "🧾 Consultorías", "📦 E-commerce", "🏋️ Gimnasios",
-      "🎨 Diseñadores", "🧮 Contadores", "📌 Otros"
-    ],
-    about: {
-      tag: "Sobre nosotros",
-      title: "Un equipo apasionado por simplificar",
-      text1: "Somos un grupo de emprendedores y tecnólogos que creemos que la tecnología debe ser un aliado, no una complicación. Con años de experiencia en desarrollo de software y asesoría a pequeños negocios, creamos actools para que tú puedas dejar atrás el caos administrativo y enfocarte en lo que mejor sabes hacer.",
-      text2: "Nuestra misión: <strong>hacerle la vida más fácil a quien lo necesita</strong>, con herramientas intuitivas, soporte cercano y un enfoque humano."
-    },
-    contacto: {
-      tag: "Contacto",
-      title: "¿Listo para transformar tu negocio?",
-      desc: "Cuéntanos tu proyecto, te ayudaremos a encontrar la mejor solución."
-    },
-    footer: {
-      brand_desc: "Haciendo la gestión de tu negocio más simple y eficiente.",
-      copyright: "© 2026 actols. Todos los derechos reservados. | Hecho con ❤️ para emprendedores."
-    }
-  };
+/* ========== VARIABLES ========== */
+:root {
+  --bg-primary: #121212;
+  --bg-secondary: #1A1A1A;
+  --bg-card: #2A2A2A;
+  --accent: #0B4F5C;
+  --accent-hover: #1B7A8C;
+  --text-primary: #F0F0F0;
+  --text-secondary: #B0B0B0;
+  --text-muted: #888888;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0,0,0,0.4);
+  --transition: 0.3s ease;
+}
 
-  const defaultEnlaces = {
-    menu: [
-      { text: "Servicios", href: "#servicios" },
-      { text: "Para quién", href: "#para-quien" },
-      { text: "Contacto", href: "#contacto" },
-      { text: "Formulario", href: "#" }
-    ],
-    hero: {
-      cta_primary: { href: "#contacto" },
-      cta_secondary: { href: "#servicios" }
-    },
-    footer_nav: [
-      { text: "Servicios", href: "#servicios" },
-      { text: "Para quién", href: "#para-quien" },
-      { text: "Contacto", href: "#contacto" }
-    ],
-    social: [
-      { href: "#", icon: "fab fa-facebook-f", label: "Facebook" },
-      { href: "#", icon: "fab fa-instagram", label: "Instagram" },
-      { href: "#", icon: "fab fa-linkedin-in", label: "LinkedIn" },
-      { href: "#", icon: "fab fa-x-twitter", label: "Twitter" }
-    ]
-  };
+/* ========== RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--accent-hover);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover {
+  color: #ffffff;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-  let textos = defaultTextos;
-  let enlaces = defaultEnlaces;
+/* ========== TIPOGRAFÍA ========== */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.4rem; margin-bottom: 0.75rem; }
+p { color: var(--text-secondary); margin-bottom: 1rem; }
 
-  // Cargar JSON
-  try {
-    const [resTextos, resEnlaces] = await Promise.all([
-      fetch('textos.json').catch(() => null),
-      fetch('enlaces.json').catch(() => null)
-    ]);
-    if (resTextos && resTextos.ok) {
-      const data = await resTextos.json();
-      textos = mergeDeep(defaultTextos, data);
-    }
-    if (resEnlaces && resEnlaces.ok) {
-      const data = await resEnlaces.json();
-      enlaces = mergeDeep(defaultEnlaces, data);
-    }
-  } catch (e) {
-    console.warn('Error al cargar JSON, usando valores por defecto.', e);
+.section {
+  padding: 80px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 14px;
+  border-radius: 30px;
+  margin-bottom: 1rem;
+}
+
+/* ========== BOTONES ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform 0.2s;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(11, 79, 92, 0.3);
+}
+.btn:hover {
+  background: var(--accent-hover);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ========== HEADER / NAV ========== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 16px 0;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.logo svg {
+  width: 28px;
+  height: 28px;
+}
+.logo span {
+  color: var(--accent);
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  font-weight: 500;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: color var(--transition);
+}
+.nav-links a:hover {
+  color: #fff;
+}
+.nav-cta {
+  display: none;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 3.4rem;
+  max-width: 900px;
+  margin: 0 auto 1.2rem;
+}
+.hero h1 .highlight {
+  color: var(--accent);
+}
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ========== PROPUESTA DE VALOR ========== */
+.propuesta-text {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ========== CARDS / GRID ========== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: var(--shadow);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+}
+.card .icon {
+  font-size: 2.4rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+.card h3 {
+  color: #fff;
+}
+.card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ========== PARA QUIÉN ========== */
+.audience-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+.audience-tag {
+  background: var(--bg-card);
+  padding: 12px 28px;
+  border-radius: 60px;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color var(--transition);
+}
+.audience-tag:hover {
+  border-color: var(--accent);
+}
+
+/* ========== SOBRE NOSOTROS ========== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.about-text p {
+  font-size: 1.05rem;
+}
+.about-image {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 40px;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255,255,255,0.08);
+}
+.about-image svg {
+  width: 64px;
+  height: 64px;
+}
+
+/* ========== CONTACTO ========== */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 1rem;
+  transition: border-color var(--transition);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.contact-info .item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.contact-info .item i {
+  font-size: 1.6rem;
+  color: var(--accent);
+  width: 40px;
+  text-align: center;
+}
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 60px;
+  transition: background 0.3s;
+  margin-top: 8px;
+}
+.whatsapp-btn:hover {
+  background: #1da85c;
+  color: #fff;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--bg-secondary);
+  padding: 48px 0 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-brand p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  max-width: 300px;
+}
+.footer-links h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.footer-links ul {
+  list-style: none;
+}
+.footer-links li {
+  margin-bottom: 8px;
+}
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.footer-links a:hover {
+  color: #fff;
+}
+.social-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.social-icons a {
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  transition: color 0.3s, transform 0.2s;
+}
+.social-icons a:hover {
+  color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+  .grid-2, .grid-3, .about-grid, .contact-wrap {
+    grid-template-columns: 1fr;
   }
-
-  // Función merge
-  function mergeDeep(target, source) {
-    const result = { ...target };
-    for (const key in source) {
-      if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-        result[key] = mergeDeep(target[key] || {}, source[key]);
-      } else {
-        result[key] = source[key];
-      }
-    }
-    return result;
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
   }
+  h1 { font-size: 2.6rem; }
+  .hero h1 { font-size: 2.6rem; }
+}
 
-  // Poblar textos
-  function populateTexts(data) {
-    document.querySelectorAll('[data-key]').forEach(el => {
-      const key = el.dataset.key;
-      const value = key.split('.').reduce((obj, k) => obj?.[k], data);
-      if (value !== undefined && value !== null && (typeof value === 'string' || typeof value === 'number')) {
-        el.innerHTML = value;
-      }
-    });
-    document.querySelectorAll('[data-text]').forEach(el => {
-      if (!el.hasAttribute('data-key')) {
-        const key = el.dataset.text;
-        const value = key.split('.').reduce((obj, k) => obj?.[k], data);
-        if (value !== undefined && value !== null && (typeof value === 'string' || typeof value === 'number')) {
-          el.innerHTML = value;
-        }
-      }
-    });
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
   }
-  populateTexts(textos);
-
-  // Poblar enlaces (href)
-  document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.dataset.key;
-    if (key.endsWith('.href')) {
-      const value = key.split('.').reduce((obj, k) => obj?.[k], enlaces);
-      if (value && typeof value === 'string') {
-        el.setAttribute('href', value);
-      }
-    }
-  });
-
-  // Navegación
-  function populateNav(selector, items) {
-    const container = document.querySelector(selector);
-    if (!container) return;
-    container.innerHTML = '';
-    items.forEach(item => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = item.href || '#';
-      a.textContent = item.text;
-      li.appendChild(a);
-      container.appendChild(li);
-    });
+  .nav-links.open {
+    display: flex;
   }
-  populateNav('.nav-links', enlaces.menu);
-  populateNav('#footerNav', enlaces.footer_nav);
-
-  // Redes sociales
-  const socialContainer = document.getElementById('socialIcons');
-  if (socialContainer && enlaces.social) {
-    socialContainer.innerHTML = '';
-    enlaces.social.forEach(social => {
-      const a = document.createElement('a');
-      a.href = social.href;
-      a.setAttribute('aria-label', social.label);
-      a.innerHTML = `<i class="${social.icon}"></i>`;
-      socialContainer.appendChild(a);
-    });
+  .hamburger {
+    display: flex;
   }
-
-  // Servicios
-  const serviciosGrid = document.getElementById('serviciosGrid');
-  if (serviciosGrid && textos.servicios_list) {
-    serviciosGrid.innerHTML = '';
-    textos.servicios_list.forEach(serv => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <span class="icon"><i class="${serv.icon}"></i></span>
-        <h3>${serv.title}</h3>
-        <p>${serv.desc}</p>
-      `;
-      serviciosGrid.appendChild(card);
-    });
+  .nav-cta {
+    display: inline-block;
   }
-
-  // Audiencia
-  const audienceList = document.getElementById('audienceList');
-  if (audienceList && textos.audiencia_list) {
-    audienceList.innerHTML = '';
-    textos.audiencia_list.forEach(item => {
-      const span = document.createElement('span');
-      span.className = 'audience-tag';
-      span.textContent = item;
-      audienceList.appendChild(span);
-    });
+  .hero {
+    padding: 80px 0 60px;
   }
-
-  // About image
-  const aboutImage = document.getElementById('aboutImage');
-  if (aboutImage) {
-    aboutImage.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0B4F5C" width="64" height="64">
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-        </svg>
-        <p style="color:var(--text-secondary);font-size:0.95rem;margin:0;">
-          Hecho con ❤️ para emprendedores.
-        </p>
-      </div>
-    `;
+  .hero h1 {
+    font-size: 2.2rem;
+    max-width: 100%;
   }
-
-  // Menú hamburguesa
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-    });
-  });
-
-  // ========== FORMULARIO: ENVÍO CON FETCH (CORREGIDO) ==========
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault(); // Evita la recarga
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
-      submitBtn.disabled = true;
-
-      // Recoger datos como FormData (no convertimos a JSON)
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch('https://formsubmit.co/el/mobalo', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'   // Pedimos respuesta JSON
-          },
-          body: formData                   // Enviamos como multipart/form-data
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          console.log('Respuesta de FormSubmit:', result);
-          alert('¡Gracias por contactarnos! En breve nos comunicaremos contigo. 😊');
-          form.reset(); // Limpiar campos
-        } else {
-          const errorText = await response.text();
-          alert('Hubo un problema al enviar el mensaje. Código: ' + response.status + ' - ' + errorText);
-          console.error('Error HTTP:', response.status, errorText);
-        }
-      } catch (error) {
-        // Error de red o CORS
-        alert('Error de conexión: ' + error.message + '. Revisa la consola para más detalles.');
-        console.error('Error de fetch:', error);
-      } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }
-    });
+  .hero p {
+    font-size: 1rem;
+    max-width: 100%;
   }
-});
+  .hero .tag {
+    margin-bottom: 0.5rem;
+  }
+  .hero-buttons {
+    gap: 20px;
+  }
+  .section {
+    padding: 60px 0;
+  }
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .propuesta-text {
+    max-width: 100%;
+  }
+  .audience-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    justify-content: center;
+  }
+  .audience-tag {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .card {
+    padding: 20px 16px;
+  }
+  .contact-wrap {
+    gap: 30px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .audience-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .audience-tag {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    white-space: normal;
+  }
+}
+
+/* ========== UTILIDADES ========== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.gap-2 { gap: 2rem; }
