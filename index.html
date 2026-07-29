@@ -113,14 +113,12 @@
         <p style="max-width:500px;margin:0 auto 2.5rem;" data-key="contacto.desc"></p>
       </div>
       <div class="contact-wrap">
-        <!-- FORMULARIO CON FORMSUBMIT (endpoint genérico) -->
+        <!-- FORMULARIO CON FORMSUBMIT -->
         <form class="contact-form" id="contactForm"
               action="https://formsubmit.co/info@actols.com"
               method="POST"
               enctype="multipart/form-data">
-          <!-- Asunto del correo -->
           <input type="hidden" name="_subject" value="Nuevo mensaje desde actols.com" />
-          <!-- Redirigir (solo si el JS falla) -->
           <input type="hidden" name="_next" value="https://actols.com/#contacto?enviado=true" />
 
           <input type="text" name="nombre" placeholder="Tu nombre completo" required />
@@ -149,7 +147,7 @@
               <a href="tel:+573107358671">+57 3107358671</a>
             </div>
           </div>
-          <!-- Horario (sin el botón de WhatsApp) -->
+          <!-- Horario -->
           <div class="item">
             <i class="fas fa-clock"></i>
             <div>
@@ -157,13 +155,13 @@
               Lunes a viernes de 9:00 a 18:00 hs (GMT-5)
             </div>
           </div>
-          <!-- WhatsApp (nuevo bloque independiente) -->
+          <!-- WhatsApp (con icono a la izquierda, título y botón sin icono) -->
           <div class="item" style="margin-top: 20px;">
             <i class="fab fa-whatsapp" style="color: #25D366;"></i>
             <div>
               <strong>WhatsApp</strong><br />
               <a href="https://wa.me/573107358671" target="_blank" class="whatsapp-btn" style="margin-top: 6px;">
-                <i class="fab fa-whatsapp"></i> Escríbenos ahora
+                Escríbenos ahora
               </a>
             </div>
           </div>
