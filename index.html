@@ -11,6 +11,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://actols.com" />
   <meta property="og:image" content="https://actols.com/assets/og-image.jpg" />
+  <!-- Favicon (llave de tuercas) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B4F5C'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>">
   <!-- Fuentes e íconos -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,7 +100,7 @@
           <p data-key="about.text2"></p>
         </div>
         <div class="about-image" id="aboutImage">
-          <!-- Se inyecta el logo SVG desde JS -->
+          <!-- Se inyecta el logo SVG con el texto debajo desde JS -->
         </div>
       </div>
     </section>
@@ -111,7 +113,18 @@
         <p style="max-width:500px;margin:0 auto 2.5rem;" data-key="contacto.desc"></p>
       </div>
       <div class="contact-wrap">
-        <form class="contact-form" id="contactForm" action="mailto:info@actols.com" method="POST" enctype="text/plain">
+        <!-- FORMULARIO CON FORMSUBMIT -->
+        <form class="contact-form" id="contactForm"
+              action="https://formsubmit.co/info@actols.com"
+              method="POST"
+              enctype="multipart/form-data">
+          <!-- Campo oculto para captcha (opcional pero recomendado) -->
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Asunto del correo -->
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde actols.com" />
+          <!-- Redirigir a la misma página después de enviar (con mensaje) -->
+          <input type="hidden" name="_next" value="https://actols.com/#contacto?enviado=true" />
+
           <input type="text" name="nombre" placeholder="Tu nombre completo" required />
           <input type="email" name="email" placeholder="Correo electrónico" required />
           <input type="text" name="telefono" placeholder="Teléfono (opcional)" />
@@ -120,6 +133,7 @@
             <span>Enviar mensaje</span> <i class="fas fa-paper-plane"></i>
           </button>
         </form>
+
         <div class="contact-info">
           <div class="item">
             <i class="fas fa-envelope"></i>
@@ -136,19 +150,14 @@
             </div>
           </div>
           <div class="item">
-            <i class="fab fa-whatsapp"></i>
-            <div>
-              <strong>WhatsApp</strong><br />
-              <a href="https://wa.me/573107358671" target="_blank" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Escríbenos ahora
-              </a>
-            </div>
-          </div>
-          <div class="item">
             <i class="fas fa-clock"></i>
             <div>
               <strong>Horario de atención</strong><br />
               Lunes a viernes de 9:00 a 18:00 hs (GMT-5)
+              <br />
+              <a href="https://wa.me/573107358671" target="_blank" class="whatsapp-btn" style="margin-top:10px;">
+                <i class="fab fa-whatsapp"></i> Escríbenos ahora
+              </a>
             </div>
           </div>
         </div>
