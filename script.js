@@ -228,11 +228,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  // ========== FORMULARIO: ENVÍO CON FETCH (AJAX) ==========
+  // ========== FORMULARIO: ENVÍO CON FETCH (CORREGIDO) ==========
   const form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', async function (e) {
-      e.preventDefault(); // Evita la recarga
+      e.preventDefault();
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
@@ -242,21 +242,34 @@ document.addEventListener('DOMContentLoaded', async () => {
       const formData = new FormData(form);
 
       try {
-        const response = await fetch('https://formsubmit.co/info@actols.com', {
+        // Endpoint AJAX de FormSubmit (con /ajax/ antes del correo)
+        const response = await fetch('https://formsubmit.co/ajax/info@actols.com', {
           method: 'POST',
-          headers: { 'Accept': 'application/json' },
+          headers: {
+            'Accept': 'application/json'
+          },
           body: formData
         });
 
+        // Leer la respuesta como texto primero (por si no es JSON)
+        const responseText = await response.text();
+        console.log('Respuesta del servidor:', responseText);
+
+        let result;
+        try {
+          // Intentar parsear como JSON
+          result = JSON.parse(responseText);
+        } catch (parseError) {
+          // Si no es JSON, mostrar el texto
+          throw new Error('El servidor devolvió una respuesta no válida: ' + responseText.substring(0, 100));
+        }
+
         if (response.ok) {
-          const result = await response.json();
-          console.log('Respuesta de FormSubmit:', result);
           alert('¡Gracias por contactarnos! En breve nos comunicaremos contigo. 😊');
           form.reset();
         } else {
-          const errorText = await response.text();
-          alert('Error ' + response.status + ': ' + errorText);
-          console.error('Error HTTP:', response.status, errorText);
+          // Si la respuesta no es ok pero sí es JSON, mostrar el mensaje de error
+          alert('Error ' + response.status + ': ' + (result.message || result.error || 'Error desconocido'));
         }
       } catch (error) {
         alert('Error de conexión: ' + error.message + '. Revisa la consola para más detalles.');
