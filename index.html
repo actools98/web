@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>actols · Gestión inteligente para tu negocio</title>
+  <meta name="description" content="actols centraliza agendamiento, facturación y tareas. Hazte la vida más fácil." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="actols · Gestión inteligente para tu negocio" />
+  <meta property="og:description" content="Centraliza agendamiento, facturación y tareas en un solo lugar. Diseñado para emprendedores." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://actols.com" />
+  <meta property="og:image" content="https://actols.com/assets/og-image.jpg" />
+  <!-- Favicon (llave de tuercas) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B4F5C'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>">
+  <!-- Fuentes e íconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo" aria-label="actols inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0B4F5C" width="28" height="28">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+        <span>actols</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <!-- Los enlaces se inyectan desde enlaces.json o por defecto -->
+      </ul>
+
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero container">
+      <span class="tag" data-key="hero.tag"></span>
+      <h1 data-key="hero.title"></h1>
+      <p data-key="hero.subtitle"></p>
+      <div class="hero-buttons">
+        <a href="#" class="btn" data-key="hero.cta_primary.href">
+          <span data-text="hero.cta_primary.text"></span> <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#" class="btn btn-outline" data-key="hero.cta_secondary.href">
+          <span data-text="hero.cta_secondary.text"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========== PROPUESTA DE VALOR ========== -->
+    <section class="section container">
+      <div class="text-center propuesta-text">
+        <span class="tag" data-key="propuesta.tag"></span>
+        <h2 data-key="propuesta.title"></h2>
+        <p style="font-size:1.1rem;" data-key="propuesta.text"></p>
+      </div>
+    </section>
+
+    <!-- ========== SERVICIOS ========== -->
+    <section id="servicios" class="section container">
+      <div class="text-center">
+        <span class="tag" data-key="servicios.tag"></span>
+        <h2 data-key="servicios.title"></h2>
+        <p style="max-width:600px;margin:0 auto 2.5rem;" data-key="servicios.desc"></p>
+      </div>
+      <div class="grid-3" id="serviciosGrid">
+        <!-- Las tarjetas se inyectan desde textos.json o por defecto -->
+      </div>
+    </section>
+
+    <!-- ========== PARA QUIÉN ES ========== -->
+    <section id="para-quien" class="section container">
+      <div class="text-center">
+        <span class="tag" data-key="audiencia.tag"></span>
+        <h2 data-key="audiencia.title"></h2>
+        <p style="max-width:550px;margin:0 auto 2rem;" data-key="audiencia.desc"></p>
+      </div>
+      <div class="audience-list" id="audienceList">
+        <!-- Los tags se inyectan desde textos.json o por defecto -->
+      </div>
+    </section>
+
+    <!-- ========== SOBRE NOSOTROS ========== -->
+    <section id="sobre-nosotros" class="section container">
+      <div class="about-grid">
+        <div class="about-text">
+          <span class="tag" data-key="about.tag"></span>
+          <h2 data-key="about.title"></h2>
+          <p data-key="about.text1"></p>
+          <p data-key="about.text2"></p>
+        </div>
+        <div class="about-image" id="aboutImage">
+          <!-- Se inyecta el logo SVG con el texto debajo desde JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section id="contacto" class="section container">
+      <div class="text-center">
+        <span class="tag" data-key="contacto.tag"></span>
+        <h2 data-key="contacto.title"></h2>
+        <p style="max-width:500px;margin:0 auto 2.5rem;" data-key="contacto.desc"></p>
+      </div>
+      <div class="contact-wrap">
+        <!-- FORMULARIO CON FORMSUBMIT -->
+        <form class="contact-form" id="contactForm"
+              action="https://formsubmit.co/info@actols.com"
+              method="POST"
+              enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde actols.com" />
+          <input type="hidden" name="_next" value="https://actols.com/#contacto?enviado=true" />
+
+          <input type="text" name="nombre" placeholder="Tu nombre completo" required />
+          <input type="email" name="email" placeholder="Correo electrónico" required />
+          <input type="text" name="telefono" placeholder="Teléfono (opcional)" />
+          <textarea name="mensaje" placeholder="Cuéntanos sobre tu negocio y qué necesitas..." required></textarea>
+          <button type="submit" class="btn" style="width:100%;justify-content:center;">
+            <span>Enviar mensaje</span> <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+
+        <div class="contact-info">
+          <!-- Email -->
+          <div class="item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Email</strong><br />
+              <a href="mailto:info@actols.com">info@actols.com</a>
+            </div>
+          </div>
+          <!-- Teléfono -->
+          <div class="item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>Teléfono</strong><br />
+              <a href="tel:+573107358671">+57 3107358671</a>
+            </div>
+          </div>
+          <!-- Horario -->
+          <div class="item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <strong>Horario de atención</strong><br />
+              Lunes a viernes de 9:00 a 18:00 hs (GMT-5)
+            </div>
+          </div>
+          <!-- WhatsApp: solo el botón, sin título ni icono a la izquierda -->
+          <div style="margin-top: 20px; display: flex; justify-content: flex-start;">
+            <a href="https://wa.me/573107358671" target="_blank" class="whatsapp-btn">
+              <i class="fab fa-whatsapp"></i> Escríbenos ahora
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="font-size:1.4rem;margin-bottom:1rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0B4F5C" width="28" height="28">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+            <span>actols</span>
+          </div>
+          <p data-key="footer.brand_desc"></p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <ul id="footerNav">
+            <!-- Se inyecta desde enlaces.json o por defecto -->
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Conéctate</h4>
+          <div class="social-icons" id="socialIcons">
+            <!-- Se inyecta desde enlaces.json o por defecto -->
+          </div>
+          <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">
+            <i class="fas fa-map-marker-alt" style="color:var(--accent);"></i> Cali, Colombia
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-key="footer.copyright"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
