@@ -38,8 +38,8 @@
     },
     {
       "icon": "fas fa-chart-line",
-      "title": "Reportes y análisis",
-      "desc": "Visualiza el rendimiento de tu negocio con métricas claras: ingresos, ocupación y productividad."
+      "title": "Generador de cotizaciones automático",
+      "desc": "Genera cotizaciones personalizadas para cada uno de tus clientes."
     },
     {
       "icon": "fas fa-users",
