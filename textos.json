@@ -37,7 +37,7 @@
       "desc": "Asigna, prioriza y da seguimiento a las actividades de tu equipo. Todo en un tablero visual."
     },
     {
-      "icon": "fas fa-chart-line",
+      "icon": "fas fa-solid fa-clipboard",
       "title": "Generador de cotizaciones automático",
       "desc": "Genera cotizaciones personalizadas para cada uno de tus clientes."
     },
