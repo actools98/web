@@ -456,7 +456,7 @@ button { font-family: inherit; cursor: pointer; }
 /* =========================================================
    SECTION HEADERS
    ========================================================= */
-.section-head { max-width: 720px; margin-bottom: 56px; }
+.section-head { max-width: 480px; margin-bottom: 56px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
 .section-caption {
