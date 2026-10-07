@@ -1240,3 +1240,61 @@ button { font-family: inherit; cursor: pointer; }
   .stat-divider { display: none; }
   .hero-stats { gap: 16px; }
 }
+/* =====================================================
+   Galería · Imágenes reales (mockup01–05)
+   Mantiene el mismo look & feel que los mockups CSS
+   ===================================================== */
+.gallery-preview--img {
+  position: relative;
+  overflow: hidden;
+  background: #0d0f14; /* fallback mientras carga */
+  aspect-ratio: 16 / 10;
+  padding: 0;
+}
+
+.gallery-preview--img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1),
+              filter   .4s ease;
+  will-change: transform;
+}
+
+/* Zoom suave al pasar el mouse (igual que el resto de la galería) */
+.gallery-item:hover .gallery-preview--img img {
+  transform: scale(1.05);
+}
+
+/* Overlay degradado sutil para integrar las imágenes con el fondo oscuro */
+.gallery-preview--img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 55%,
+    rgba(0,0,0,.35) 100%
+  );
+  pointer-events: none;
+  opacity: .9;
+  transition: opacity .4s ease;
+}
+
+.gallery-item:hover .gallery-preview--img::after {
+  opacity: .6;
+}
+
+/* Variante ancha (span-2): proporción más panorámica */
+.gallery-item.span-2 .gallery-preview--img {
+  aspect-ratio: 21 / 10;
+}
+
+/* Responsive: en pantallas pequeñas un poco más alto */
+@media (max-width: 640px) {
+  .gallery-preview--img,
+  .gallery-item.span-2 .gallery-preview--img {
+    aspect-ratio: 4 / 3;
+  }
+}
