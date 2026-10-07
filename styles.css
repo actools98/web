@@ -1298,3 +1298,74 @@ button { font-family: inherit; cursor: pointer; }
     aspect-ratio: 4 / 3;
   }
 }
+/* =====================================================
+   Galería · Imágenes reales (mockup01–05)
+   Formato vertical 385×774 → ratio ~1:2
+   ===================================================== */
+
+.gallery-preview--img {
+  position: relative;
+  overflow: hidden;
+  background: #0d0f14;
+  padding: 0;
+  /* Proporción vertical basada en 385/774 ≈ 0.4974 → 1 / 2.01 */
+  aspect-ratio: 385 / 774;
+  /* Altura máxima para que no se hagan gigantes en desktop */
+  max-height: 520px;
+  /* Centra la tarjeta si max-height recorta el ancho */
+  margin-inline: auto;
+  width: 100%;
+  border-radius: inherit;
+}
+
+.gallery-preview--img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* llena el marco sin deformar */
+  object-position: top;   /* prioriza la parte superior del mockup */
+  display: block;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1),
+              filter   .4s ease;
+  will-change: transform;
+}
+
+/* Zoom suave al pasar el mouse */
+.gallery-item:hover .gallery-preview--img img {
+  transform: scale(1.04);
+}
+
+/* Overlay degradado sutil para integrar con el fondo oscuro */
+.gallery-preview--img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 60%,
+    rgba(0,0,0,.35) 100%
+  );
+  pointer-events: none;
+  opacity: .9;
+  transition: opacity .4s ease;
+}
+
+.gallery-item:hover .gallery-preview--img::after {
+  opacity: .6;
+}
+
+/* Los items "span-2" NO deben forzar formato panorámico ahora,
+   así que anulamos cualquier aspect-ratio heredado. */
+.gallery-item.span-2 .gallery-preview--img {
+  aspect-ratio: 385 / 774;
+  max-height: 520px;
+}
+
+/* Responsive: en pantallas pequeñas mantenemos vertical pero
+   un poco más contenido para que no domine toda la pantalla. */
+@media (max-width: 640px) {
+  .gallery-preview--img,
+  .gallery-item.span-2 .gallery-preview--img {
+    aspect-ratio: 385 / 774;
+    max-height: 460px;
+  }
+}
