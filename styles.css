@@ -1324,31 +1324,27 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0;
   line-height: 1.5;
 }
-
 /* =====================================================
-   ARREGLO DE LA IMAGEN DE ESCRITORIO (Para que no salga cortada)
+   ARREGLO DE LA IMAGEN DE ESCRITORIO
    ===================================================== */
 
-/* Forzamos formato horizontal (16:10) para la web */
-.gallery-item:has(img[alt="Captura de escritorio"]) .gallery-preview--img {
-  aspect-ratio: 16 / 10; 
-  max-height: 380px; 
+/* 1. Le damos al contenedor de la web una proporción horizontal (16:9) */
+.gallery-item--web .gallery-preview--img {
+  aspect-ratio: 16 / 9; /* Formato panorámico ideal para webs */
+  max-height: none;     /* Quitamos el límite de altura para que no se aplaste */
   background: #0d0d18; 
 }
 
-/* Ajustamos la imagen web para que se vea COMPLETA */
-.gallery-item:has(img[alt="Captura de escritorio"]) .gallery-preview--img img {
-  object-fit: contain; /* Muestra la imagen completa sin recortar */
+/* 2. Ajustamos la imagen para que se vea completa (sin recortes) y ocupe todo el espacio posible */
+.gallery-item--web .gallery-preview--img img {
+  object-fit: contain;  /* Muestra la imagen completa */
   object-position: center; 
   background: #0d0d18;
+  /* Hacemos un pequeño zoom para que llene más el espacio horizontal */
+  transform: scale(1.02); 
 }
 
-/* En móviles, mostramos el texto siempre (no hay mouse) */
-@media (max-width: 768px) {
-  .gallery-info-overlay {
-    opacity: 1;
-    visibility: visible;
-    background: linear-gradient(to top, rgba(5, 5, 10, 0.98) 0%, rgba(5, 5, 10, 0.7) 70%, transparent 100%);
-    backdrop-filter: none;
-  }
+/* 3. Efecto hover (opcional) para que haga un zoom sutil al pasar el mouse */
+.gallery-item--web:hover .gallery-preview--img img {
+  transform: scale(1.06);
 }
