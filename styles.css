@@ -1311,3 +1311,76 @@ button { font-family: inherit; cursor: pointer; }
     max-height: 460px;
   }
 }
+/* =====================================================
+   NUEVOS ESTILOS: GALERÍA CON OVERLAY INTERNO Y WEB
+   ===================================================== */
+
+/* 1. Ocultamos el contenedor de texto viejo (el que estaba debajo) */
+.gallery-info {
+  display: none !important;
+}
+
+/* 2. Estilos para el texto dentro de la imagen */
+.gallery-info-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 20px 20px;
+  /* Degradado para que el texto sea legible sobre la imagen */
+  background: linear-gradient(to top, rgba(5, 5, 10, 0.95) 0%, rgba(5, 5, 10, 0.8) 50%, transparent 100%);
+  z-index: 2; /* Por encima de la imagen y del overlay oscuro */
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  pointer-events: none; /* Permite hacer hover a través de él si es necesario */
+}
+
+/* Efecto: el texto sube al pasar el mouse */
+.gallery-item:hover .gallery-info-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Ajustes de los textos dentro del overlay */
+.gallery-info-overlay .tag {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--electric-cyan);
+  margin-bottom: 6px;
+}
+
+.gallery-info-overlay h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.gallery-info-overlay p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 3. Ajuste específico para el ítem de escritorio (Web) */
+/* Forzamos que este ítem tenga proporción horizontal (16:9 aprox) */
+.gallery-item:has(img[alt*="escritorio"]) .gallery-preview--img {
+  aspect-ratio: 16 / 10;
+  max-height: 380px; /* Evita que se haga muy alta */
+}
+
+/* En móviles, permitimos que la descripción sea visible por defecto */
+@media (max-width: 768px) {
+  .gallery-info-overlay {
+    transform: translateY(0);
+    opacity: 1;
+    background: linear-gradient(to top, rgba(5, 5, 10, 0.98) 0%, rgba(5, 5, 10, 0.8) 70%, transparent 100%);
+  }
+}
