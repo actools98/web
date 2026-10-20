@@ -1384,3 +1384,86 @@ button { font-family: inherit; cursor: pointer; }
     background: linear-gradient(to top, rgba(5, 5, 10, 0.98) 0%, rgba(5, 5, 10, 0.8) 70%, transparent 100%);
   }
 }
+/* =====================================================
+   GALERÍA: OVERLAY FLOTANTE Y AJUSTE WEB
+   ===================================================== */
+
+/* 1. Ocultamos el contenedor de texto viejo de abajo */
+.gallery-info {
+  display: none !important;
+}
+
+/* 2. Contenedor del texto que va DENTRO de la imagen */
+.gallery-info-overlay {
+  position: absolute;
+  inset: 0; /* Cubre toda la imagen */
+  padding: 24px;
+  background: rgba(5, 5, 10, 0.85); /* Fondo oscuro semitransparente */
+  backdrop-filter: blur(4px); /* Efecto de desenfoque de fondo */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Alinea el texto abajo */
+  
+  /* Efecto de aparición: Oculto y transparente por defecto */
+  opacity: 0; 
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 3. Mostrar al pasar el mouse (Hover) */
+.gallery-item:hover .gallery-info-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Textos dentro del overlay */
+.gallery-info-overlay .tag {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--electric-cyan);
+  margin-bottom: 6px;
+}
+
+.gallery-info-overlay h3 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+}
+
+.gallery-info-overlay p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 4. ARREGLO DE LA IMAGEN DE ESCRITORIO (Para que no salga cortada) */
+/* Detectamos la imagen con alt="escritorio" */
+.gallery-item:has(img[alt="escritorio"]) .gallery-preview--img {
+  aspect-ratio: 16 / 10; /* Formato horizontal para la web */
+  max-height: 380px; 
+  background: #0d0d18; /* Fondo por si la imagen no llena todo */
+}
+
+/* Ajustamos la forma en que la imagen de escritorio se adapta */
+.gallery-item:has(img[alt="escritorio"]) .gallery-preview--img img {
+  object-fit: contain; /* Muestra la imagen completa sin recortar */
+  object-position: center; /* Centrada */
+  background: #0d0d18;
+}
+
+/* En móviles, mostramos el texto siempre (no hay mouse) */
+@media (max-width: 768px) {
+  .gallery-info-overlay {
+    opacity: 1;
+    visibility: visible;
+    background: linear-gradient(to top, rgba(5, 5, 10, 0.95) 0%, rgba(5, 5, 10, 0.6) 60%, transparent 100%);
+    backdrop-filter: none;
+  }
+}
