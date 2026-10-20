@@ -1241,20 +1241,22 @@ button { font-family: inherit; cursor: pointer; }
   .hero-stats { gap: 16px; }
 }
 /* =====================================================
-   Galería · Imágenes reales (mockup01–05)
-   Formato vertical 385×774 → ratio ~1:2
+   GALERÍA: OVERLAY FLOTANTE (APARECE AL HOVER) Y WEB
    ===================================================== */
 
+/* Ocultamos el contenedor de texto viejo que estaba debajo */
+.gallery-info {
+  display: none !important;
+}
+
+/* Base de la imagen (la que estaba en tu código original) */
 .gallery-preview--img {
   position: relative;
   overflow: hidden;
   background: #0d0f14;
   padding: 0;
-  /* Proporción vertical basada en 385/774 ≈ 0.4974 → 1 / 2.01 */
-  aspect-ratio: 385 / 774;
-  /* Altura máxima para que no se hagan gigantes en desktop */
+  aspect-ratio: 385 / 774; /* Formato vertical para móviles */
   max-height: 520px;
-  /* Centra la tarjeta si max-height recorta el ancho */
   margin-inline: auto;
   width: 100%;
   border-radius: inherit;
@@ -1263,155 +1265,35 @@ button { font-family: inherit; cursor: pointer; }
 .gallery-preview--img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* llena el marco sin deformar */
-  object-position: top;   /* prioriza la parte superior del mockup */
+  object-fit: cover;
+  object-position: top;
   display: block;
-  transition: transform .6s cubic-bezier(.2,.8,.2,1),
-              filter   .4s ease;
-  will-change: transform;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
 
-/* Zoom suave al pasar el mouse */
 .gallery-item:hover .gallery-preview--img img {
   transform: scale(1.04);
 }
 
-/* Overlay degradado sutil para integrar con el fondo oscuro */
-.gallery-preview--img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,0) 60%,
-    rgba(0,0,0,.35) 100%
-  );
-  pointer-events: none;
-  opacity: .9;
-  transition: opacity .4s ease;
-}
-
-.gallery-item:hover .gallery-preview--img::after {
-  opacity: .6;
-}
-
-/* Los items "span-2" NO deben forzar formato panorámico ahora,
-   así que anulamos cualquier aspect-ratio heredado. */
-.gallery-item.span-2 .gallery-preview--img {
-  aspect-ratio: 385 / 774;
-  max-height: 520px;
-}
-
-/* Responsive: en pantallas pequeñas mantenemos vertical pero
-   un poco más contenido para que no domine toda la pantalla. */
-@media (max-width: 640px) {
-  .gallery-preview--img,
-  .gallery-item.span-2 .gallery-preview--img {
-    aspect-ratio: 385 / 774;
-    max-height: 460px;
-  }
-}
-/* =====================================================
-   NUEVOS ESTILOS: GALERÍA CON OVERLAY INTERNO Y WEB
-   ===================================================== */
-
-/* 1. Ocultamos el contenedor de texto viejo (el que estaba debajo) */
-.gallery-info {
-  display: none !important;
-}
-
-/* 2. Estilos para el texto dentro de la imagen */
-.gallery-info-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 24px 20px 20px;
-  /* Degradado para que el texto sea legible sobre la imagen */
-  background: linear-gradient(to top, rgba(5, 5, 10, 0.95) 0%, rgba(5, 5, 10, 0.8) 50%, transparent 100%);
-  z-index: 2; /* Por encima de la imagen y del overlay oscuro */
-  transform: translateY(100%);
-  opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
-  pointer-events: none; /* Permite hacer hover a través de él si es necesario */
-}
-
-/* Efecto: el texto sube al pasar el mouse */
-.gallery-item:hover .gallery-info-overlay {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* Ajustes de los textos dentro del overlay */
-.gallery-info-overlay .tag {
-  display: inline-block;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  color: var(--electric-cyan);
-  margin-bottom: 6px;
-}
-
-.gallery-info-overlay h3 {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 6px;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-}
-
-.gallery-info-overlay p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* 3. Ajuste específico para el ítem de escritorio (Web) */
-/* Forzamos que este ítem tenga proporción horizontal (16:9 aprox) */
-.gallery-item:has(img[alt*="escritorio"]) .gallery-preview--img {
-  aspect-ratio: 16 / 10;
-  max-height: 380px; /* Evita que se haga muy alta */
-}
-
-/* En móviles, permitimos que la descripción sea visible por defecto */
-@media (max-width: 768px) {
-  .gallery-info-overlay {
-    transform: translateY(0);
-    opacity: 1;
-    background: linear-gradient(to top, rgba(5, 5, 10, 0.98) 0%, rgba(5, 5, 10, 0.8) 70%, transparent 100%);
-  }
-}
-/* =====================================================
-   GALERÍA: OVERLAY FLOTANTE Y AJUSTE WEB
-   ===================================================== */
-
-/* 1. Ocultamos el contenedor de texto viejo de abajo */
-.gallery-info {
-  display: none !important;
-}
-
-/* 2. Contenedor del texto que va DENTRO de la imagen */
+/* Contenedor del texto que va DENTRO de la imagen */
 .gallery-info-overlay {
   position: absolute;
   inset: 0; /* Cubre toda la imagen */
   padding: 24px;
-  background: rgba(5, 5, 10, 0.85); /* Fondo oscuro semitransparente */
-  backdrop-filter: blur(4px); /* Efecto de desenfoque de fondo */
-  z-index: 2;
+  background: rgba(5, 5, 10, 0.88); /* Fondo oscuro semitransparente */
+  backdrop-filter: blur(4px); 
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Alinea el texto abajo */
+  justify-content: flex-end; 
   
-  /* Efecto de aparición: Oculto y transparente por defecto */
+  /* Oculto por defecto */
   opacity: 0; 
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* 3. Mostrar al pasar el mouse (Hover) */
+/* Mostrar al pasar el mouse */
 .gallery-item:hover .gallery-info-overlay {
   opacity: 1;
   visibility: visible;
@@ -1443,18 +1325,21 @@ button { font-family: inherit; cursor: pointer; }
   line-height: 1.5;
 }
 
-/* 4. ARREGLO DE LA IMAGEN DE ESCRITORIO (Para que no salga cortada) */
-/* Detectamos la imagen con alt="escritorio" */
-.gallery-item:has(img[alt="escritorio"]) .gallery-preview--img {
-  aspect-ratio: 16 / 10; /* Formato horizontal para la web */
+/* =====================================================
+   ARREGLO DE LA IMAGEN DE ESCRITORIO (Para que no salga cortada)
+   ===================================================== */
+
+/* Forzamos formato horizontal (16:10) para la web */
+.gallery-item:has(img[alt="Captura de escritorio"]) .gallery-preview--img {
+  aspect-ratio: 16 / 10; 
   max-height: 380px; 
-  background: #0d0d18; /* Fondo por si la imagen no llena todo */
+  background: #0d0d18; 
 }
 
-/* Ajustamos la forma en que la imagen de escritorio se adapta */
-.gallery-item:has(img[alt="escritorio"]) .gallery-preview--img img {
+/* Ajustamos la imagen web para que se vea COMPLETA */
+.gallery-item:has(img[alt="Captura de escritorio"]) .gallery-preview--img img {
   object-fit: contain; /* Muestra la imagen completa sin recortar */
-  object-position: center; /* Centrada */
+  object-position: center; 
   background: #0d0d18;
 }
 
@@ -1463,7 +1348,7 @@ button { font-family: inherit; cursor: pointer; }
   .gallery-info-overlay {
     opacity: 1;
     visibility: visible;
-    background: linear-gradient(to top, rgba(5, 5, 10, 0.95) 0%, rgba(5, 5, 10, 0.6) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(5, 5, 10, 0.98) 0%, rgba(5, 5, 10, 0.7) 70%, transparent 100%);
     backdrop-filter: none;
   }
 }
