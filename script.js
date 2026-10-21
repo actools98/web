@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Reveal on scroll (services, etc.) ---------- */
+  /* ---------- Reveal on scroll ---------- */
   const revealEls = document.querySelectorAll('.reveal');
 
   if ('IntersectionObserver' in window && revealEls.length) {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => el.classList.add('visible'));
   }
 
-  /* ---------- Glow que sigue al cursor en las service cards ---------- */
+  /* ---------- Glow que sigue al cursor ---------- */
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- Parallax sutil del glow del hero ---------- */
+  /* ---------- Parallax sutil del hero ---------- */
   const heroGlow = document.querySelector('.hero-glow');
   if (heroGlow && window.matchMedia('(min-width: 900px)').matches) {
     window.addEventListener('scroll', () => {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  /* ---------- Scroll suave para enlaces internos ---------- */
+  /* ---------- Scroll suave ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const id = this.getAttribute('href');
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------
-     2. HERO — cursor-reactive aura parallax (desktop only)
+     2. HERO — cursor-reactive aura parallax
      --------------------------------------------------------- */
   const hero = document.querySelector('.hero');
   const heroGlowEl = document.querySelector('.hero-glow');
@@ -178,9 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------
-     3. GALLERY — 3D cursor tilt + spotlight
+     3. GALLERY — 3D cursor tilt (EXCLUYENDO la tarjeta web)
      --------------------------------------------------------- */
-  const tiltItems = document.querySelectorAll('.gallery-item');
+  // ¡AQUÍ ESTÁ LA MAGIA! El ":not" evita que la web se deforme.
+  const tiltItems = document.querySelectorAll('.gallery-item:not(.gallery-item--web)');
 
   if (!reduceMotion) {
     tiltItems.forEach(card => {
