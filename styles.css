@@ -1241,13 +1241,54 @@ button { font-family: inherit; cursor: pointer; }
   .hero-stats { gap: 16px; }
 }
 /* =====================================================
-   GALERÍA: ESTILOS FINALES
+   GALERÍA: AJUSTE MAESTRO
    ===================================================== */
 
-/* Ocultar el texto viejo */
-.gallery-info { display: none !important; }
+/* 1. Ocultar el texto viejo */
+.gallery-info {
+  display: none !important;
+}
 
-/* 1. Estilos para los celulares (Items 1, 2, 3) */
+/* =====================================================
+   2. ARREGLO DEFINITIVO PARA LA CAPTURA DE ESCRITORIO
+   ===================================================== */
+
+/* Hacemos que la tarjeta de la web ocupe TODAS las columnas (100% de ancho) */
+.gallery-item--web {
+  grid-column: 1 / -1 !important; 
+  width: 100%;
+}
+
+/* El contenedor toma la proporción exacta de tu imagen (1370x783) */
+.gallery-item--web .gallery-preview--img {
+  position: relative;
+  background: #0d0d18;
+  padding: 0;
+  width: 100%;
+  aspect-ratio: 1370 / 783 !important; 
+  height: auto;
+  max-height: none !important; /* Elimina cualquier límite anterior */
+  border-radius: inherit;
+}
+
+/* La imagen se muestra COMPLETA, sin recortes y centrada */
+.gallery-item--web .gallery-preview--img img.img-web {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important; /* "contain" evita que se corte */
+  object-position: center;
+  display: block;
+  transition: transform .4s ease;
+}
+
+/* Efecto hover para la web */
+.gallery-item--web:hover .gallery-preview--img img.img-web {
+  transform: scale(1.02);
+}
+
+/* =====================================================
+   3. ESTILOS PARA LOS CELULARES (Items 1, 2 y 3)
+   ===================================================== */
 .gallery-item:not(.gallery-item--web) .gallery-preview--img {
   position: relative;
   overflow: hidden;
@@ -1268,32 +1309,6 @@ button { font-family: inherit; cursor: pointer; }
   transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
 
-/* 2. EL ARREGLO DEFINITIVO PARA LA CAPTURA DE ESCRITORIO */
-/* Quitamos cualquier límite de altura y le damos su proporción exacta */
-.gallery-item--web .gallery-preview--img {
-  position: relative;
-  background: #0d0d18;
-  padding: 0;
-  width: 100%;
-  aspect-ratio: 1370 / 783; /* Proporción exacta de tu imagen */
-  height: auto;
-  max-height: none; 
-  border-radius: inherit;
-}
-
-/* Forzamos a que la imagen se vea completa y sin recortes */
-.gallery-item--web .gallery-preview--img img.img-web {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* "contain" asegura que no se recorte nada */
-  display: block;
-  transition: transform .4s ease;
-}
-
-/* Efectos hover suaves */
 .gallery-item:not(.gallery-item--web):hover .gallery-preview--img img {
   transform: scale(1.04);
-}
-.gallery-item--web:hover .gallery-preview--img img.img-web {
-  transform: scale(1.02);
 }
