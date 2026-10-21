@@ -1241,28 +1241,25 @@ button { font-family: inherit; cursor: pointer; }
   .hero-stats { gap: 16px; }
 }
 /* =====================================================
-   GALERÍA: LIMPIEZA Y AJUSTE DEFINITIVO
+   GALERÍA: ESTILOS FINALES
    ===================================================== */
 
-/* Ocultamos el contenedor de texto viejo */
-.gallery-info {
-  display: none !important;
-}
+/* Ocultar el texto viejo */
+.gallery-info { display: none !important; }
 
-/* 1. ESTILOS BASE PARA LOS CELULARES (Items 1, 2 y 3) */
+/* 1. Estilos para los celulares (Items 1, 2, 3) */
 .gallery-item:not(.gallery-item--web) .gallery-preview--img {
   position: relative;
   overflow: hidden;
   background: #0d0f14;
   padding: 0;
-  aspect-ratio: 385 / 774; /* Formato vertical */
+  aspect-ratio: 385 / 774; 
   max-height: 520px;
-  margin-inline: auto;
   width: 100%;
   border-radius: inherit;
 }
 
-.gallery-preview--img img {
+.gallery-item:not(.gallery-item--web) .gallery-preview--img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1271,73 +1268,32 @@ button { font-family: inherit; cursor: pointer; }
   transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
 
-/* 2. ARREGLO PARA LA CAPTURA DE ESCRITORIO (Item 4) */
-/* Le damos la proporción exacta de tu imagen 1370x783 (que es 16:9) */
+/* 2. EL ARREGLO DEFINITIVO PARA LA CAPTURA DE ESCRITORIO */
+/* Quitamos cualquier límite de altura y le damos su proporción exacta */
 .gallery-item--web .gallery-preview--img {
   position: relative;
-  overflow: hidden;
   background: #0d0d18;
-  aspect-ratio: 1370 / 783 !important; 
-  max-height: 100% !important; /* Elimina el límite que la aplastaba */
+  padding: 0;
   width: 100%;
+  aspect-ratio: 1370 / 783; /* Proporción exacta de tu imagen */
+  height: auto;
+  max-height: none; 
   border-radius: inherit;
 }
 
-/* Hacemos que la imagen de la web se vea COMPLETA */
-.gallery-item--web .gallery-preview--img img {
-  object-fit: contain !important; 
-  object-position: center;
+/* Forzamos a que la imagen se vea completa y sin recortes */
+.gallery-item--web .gallery-preview--img img.img-web {
   width: 100%;
   height: 100%;
+  object-fit: contain; /* "contain" asegura que no se recorte nada */
+  display: block;
+  transition: transform .4s ease;
 }
 
-/* Efecto hover sutil para la web */
-.gallery-item--web:hover .gallery-preview--img img {
+/* Efectos hover suaves */
+.gallery-item:not(.gallery-item--web):hover .gallery-preview--img img {
+  transform: scale(1.04);
+}
+.gallery-item--web:hover .gallery-preview--img img.img-web {
   transform: scale(1.02);
-}
-
-/* 3. OVERLAY (El texto que aparece al pasar el mouse - Opcional) */
-.gallery-info-overlay {
-  position: absolute;
-  inset: 0; 
-  padding: 24px;
-  background: rgba(5, 5, 10, 0.88);
-  backdrop-filter: blur(4px); 
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; 
-  opacity: 0; 
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.gallery-item:hover .gallery-info-overlay {
-  opacity: 1;
-  visibility: visible;
-}
-
-.gallery-info-overlay .tag {
-  display: inline-block;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  color: var(--electric-cyan);
-  margin-bottom: 6px;
-}
-
-.gallery-info-overlay h3 {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 8px;
-  color: var(--text-primary);
-}
-
-.gallery-info-overlay p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.5;
 }
